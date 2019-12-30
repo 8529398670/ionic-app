@@ -1,0 +1,56 @@
+import { Component } from '@angular/core';
+
+import { webSocket , WebSocketSubject } from 'rxjs/webSocket';
+import { environment } from '../environments/environment';
+// https://rxjs-dev.firebaseapp.com/api/webSocket/webSocket
+const WEBSOCKET_URL = `ws://${ environment.websocket.host }:${ environment.websocket.port }`;
+
+import { MessageService } from './services/message.service';
+
+import { Platform } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+
+@Component({
+	selector: 'app-root',
+	templateUrl: 'app.component.html',
+	styleUrls: ['app.component.scss'] ,
+})
+export class AppComponent {
+	public websocket = webSocket({
+		url: WEBSOCKET_URL,
+	});
+	public appPages = [
+		{
+			title: 'Home',
+			url: '/home',
+			icon: 'home'
+		},
+		{
+			title: 'List',
+			url: '/list',
+			icon: 'list'
+		} ,
+		{
+			title: 'Log',
+			url: '/log',
+			icon: 'list'
+		}
+	];
+
+	constructor(
+		private platform: Platform,
+		private splashScreen: SplashScreen,
+		private statusBar: StatusBar
+	) {
+		this.initializeApp();
+	}
+
+	initializeApp() {
+		this.platform.ready().then(() => {
+			this.statusBar.styleDefault();
+			this.splashScreen.hide();
+		});
+	}
+
+}

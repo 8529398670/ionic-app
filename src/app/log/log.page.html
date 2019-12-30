@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+	<ion-buttons slot="start">
+	  <ion-menu-button></ion-menu-button>
+	</ion-buttons>
+	<ion-title>Log</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+		<ion-row class="ion-align-items-center">
+			<ion-col #logcontainer>
+				<ion-card *ngFor="let log_item of downloaded" >
+						<!-- <p>{{ log_item.message }}</p> -->
+						<ion-card-header>
+							<ion-card-title>
+								{{ log_item.list_key }}
+							</ion-card-title>
+						</ion-card-header>
+						<ion-card-content>
+							{{ log_item.message }}
+						</ion-card-content>
+				</ion-card>
+			</ion-col>
+			<ion-col>
+
+			</ion-col>
+<!-- 			<ion-virtual-scroll [items]="downloaded" >
+				<ion-card *virtualItem="let item;">
+					<ion-card-header>
+						<ion-card-title>{{ item.list_key }}</ion-card-title>
+					</ion-card-header>
+					<ion-card-content>{{ item.message }}</ion-card-content>
+				</ion-card>
+			</ion-virtual-scroll> -->
+		</ion-row>
+	</ion-grid>
+</ion-content>
